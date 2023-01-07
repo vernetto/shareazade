@@ -1,12 +1,14 @@
 package org.pierre.shareazade.entities;
 import jakarta.persistence.*;
+import lombok.Data;
 import org.pierre.shareazade.constants.ShareType;
 
 import java.util.Date;
 
 
 @Entity
-public class ShareEntry {
+@Data
+public class ShareEntryEntity {
     @Id
     @GeneratedValue(generator="shareentry_seq")
     @SequenceGenerator(name="shareentry_seq",sequenceName="SHAREENTRY_SEQ", allocationSize=1, initialValue = 1)
