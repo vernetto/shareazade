@@ -23,6 +23,11 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+
+jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS=false
+
 logging:
   level:
     org.springframework: ERROR
@@ -37,6 +42,10 @@ springdoc:
   swagger-ui:
     disable-swagger-default-url: true
 
+
+
+
+
 local:
   server:
     port: 8081
@@ -45,3 +54,7 @@ local:
 server:
   error:
     include-message: always
+
+security:
+  basic:
+    enabled=false

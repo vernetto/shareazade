@@ -16,11 +16,12 @@ public class ShareEntry {
     private Date shareDate;
 
     @Column(length = 5, nullable = false)
-    private String fromTime;
-    @Column(length = 5, nullable = false)
-    private String toTime;
+    private String shareTime;
 
     @Enumerated(EnumType.STRING)
     private ShareType shareType;
+
+    @Column(length = 100, nullable = true)
+    private String shareComment;
 
 }
