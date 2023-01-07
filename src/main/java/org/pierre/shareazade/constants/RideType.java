@@ -1,5 +1,5 @@
 package org.pierre.shareazade.constants;
 
-public enum ShareType {
+public enum RideType {
     REQUEST, OFFER
 }

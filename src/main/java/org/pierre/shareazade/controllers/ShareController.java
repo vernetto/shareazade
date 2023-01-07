@@ -1,11 +1,8 @@
 package org.pierre.shareazade.controllers;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.pierre.shareazade.constants.ShareType;
-import org.pierre.shareazade.dtos.ShareEntryDTO;
+import org.pierre.shareazade.constants.RideType;
+import org.pierre.shareazade.dtos.RideEntryDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +18,14 @@ import java.util.List;
 @CrossOrigin
 public class ShareController {
     @GetMapping("/getAll")
-    public List<ShareEntryDTO> getAllShares() throws Exception {
-        ShareEntryDTO shareEntryDTO = new ShareEntryDTO();
-        shareEntryDTO.setShareComment("commento");
-        shareEntryDTO.setId(2L);
-        shareEntryDTO.setShareDate(new Date());
-        shareEntryDTO.setShareType(ShareType.REQUEST);
+    public List<RideEntryDTO> getAllRides() throws Exception {
+        RideEntryDTO rideEntryDTO = new RideEntryDTO();
+        rideEntryDTO.setRideComment("commento");
+        rideEntryDTO.setId(2L);
+        rideEntryDTO.setRideDate(new Date());
+        rideEntryDTO.setRideType(RideType.REQUEST);
 
-        return Arrays.asList(shareEntryDTO);
+        return Arrays.asList(rideEntryDTO);
     }
 
 }

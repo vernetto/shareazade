@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Entity
 @Data
-public class ShareUserEntity {
+public class UserEntity {
     @Id
-    @GeneratedValue(generator="shareuser_seq")
-    @SequenceGenerator(name="shareuser_seq",sequenceName="SHAREUSER_SEQ", allocationSize=1, initialValue = 1)
+    @GeneratedValue(generator="user_seq")
+    @SequenceGenerator(name="user_seq",sequenceName="USER_SEQ", allocationSize=1, initialValue = 1)
     private Long id;
 
     @Column(length = 100, nullable = false)

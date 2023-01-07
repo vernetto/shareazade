@@ -1,27 +1,27 @@
 package org.pierre.shareazade.entities;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.pierre.shareazade.constants.ShareType;
+import org.pierre.shareazade.constants.RideType;
 
 import java.util.Date;
 
 
 @Entity
 @Data
-public class ShareEntryEntity {
+public class RideEntryEntity {
     @Id
-    @GeneratedValue(generator="shareentry_seq")
-    @SequenceGenerator(name="shareentry_seq",sequenceName="SHAREENTRY_SEQ", allocationSize=1, initialValue = 1)
+    @GeneratedValue(generator="rideentry_seq")
+    @SequenceGenerator(name="rideentry_seq",sequenceName="RIDEENTRY_SEQ", allocationSize=1, initialValue = 1)
     private Long id;
 
     @Column(nullable = false)
-    private Date shareDate;
+    private Date rideDate;
 
     @Column(length = 5, nullable = false)
-    private String shareTime;
+    private String rideTime;
 
     @Enumerated(EnumType.STRING)
-    private ShareType shareType;
+    private RideType rideType;
 
     @Column(length = 100, nullable = true)
     private String shareComment;
