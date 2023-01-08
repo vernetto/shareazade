@@ -7,6 +7,8 @@ import AddUser from "./AddUser";
 import AddCity from "./AddCity";
 import AddRide from "./AddRide";
 import Ride from "./Ride";
+import User from "./User";
+import NotFound from "./NotFound";
 
 function App() {
   return (
@@ -17,23 +19,31 @@ function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/addride">Add Ride</Link>
+            <Link to="/ride/add">Add Ride</Link>
           </li>
           <li>
-            <Link to="/adduser">Add User</Link>
+            <Link to="/user/add">Add User</Link>
           </li>
           <li>
-            <Link to="/addcity">Add City</Link>
+            <Link to="/city/add">Add City</Link>
           </li>
         </ul>
       </nav>
 
       <Routes>
         <Route path="/" element={<RideTable />}></Route>
-        <Route path="/adduser" element={<AddUser />}></Route>
-        <Route path="/addcity" element={<AddCity />}></Route>
-        <Route path="/addride" element={<AddRide />}></Route>
-        <Route path="/ride/:id" element={<Ride />}></Route>
+        <Route path="/user">
+          <Route path="add" element={<AddUser />}></Route>
+          <Route path=":id" element={<User />}></Route>
+        </Route>
+        <Route path="/city">
+          <Route path="add" element={<AddCity />}></Route>
+        </Route>
+        <Route path='/ride'>
+          <Route path="add" element={<AddRide />}></Route>
+          <Route path=":id" element={<Ride />}></Route>
+        </Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </>
   );
