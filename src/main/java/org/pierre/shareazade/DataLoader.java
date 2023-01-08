@@ -43,15 +43,22 @@ public class DataLoader implements ApplicationRunner {
         user2.setFullName("Igiulreip Ottenrev");
         userRepository.save(user2);
 
-        RideEntryEntity rideEntry = new RideEntryEntity();
-        rideEntry.setRideDate(new Date());
-        rideEntry.setRideTime("05");
-        rideEntry.setRideType(RideType.REQUEST);
-        rideEntry.setFromCity(cityEntity1);
-        rideEntry.setToCity(cityEntity2);
-        rideEntry.setUserEntity(user1);
+        RideEntryEntity rideEntry1 = new RideEntryEntity();
+        rideEntry1.setRideDate(new Date());
+        rideEntry1.setRideTime("05");
+        rideEntry1.setRideType(RideType.REQUEST);
+        rideEntry1.setFromCity(cityEntity1);
+        rideEntry1.setToCity(cityEntity2);
+        rideEntry1.setUserEntity(user1);
+        rideEntryRepository.save(rideEntry1);
 
-
-        rideEntryRepository.save(rideEntry);
+        RideEntryEntity rideEntry2 = new RideEntryEntity();
+        rideEntry2.setRideDate(new Date());
+        rideEntry2.setRideTime("07");
+        rideEntry2.setRideType(RideType.OFFER);
+        rideEntry2.setFromCity(cityEntity3);
+        rideEntry2.setToCity(cityEntity1);
+        rideEntry2.setUserEntity(user2);
+        rideEntryRepository.save(rideEntry2);
     }
 }
