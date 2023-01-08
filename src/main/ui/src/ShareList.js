@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 export default function ShareList() {
     const[loading, setLoading] = useState(true)
     const[shareList,setShareList] = useState([])
-    const[error, setError] = useState()
+    const[errorMessage, setErrorMessage] = useState("")
 
     useEffect( () => {
         console.log("shareList changed " + JSON.stringify(shareList))
     }, [shareList])
+
+    useEffect( () => {
+        console.log("loading changed " + JSON.stringify(loading))
+    }, [loading])
 
      useEffect(()=>{
         const controller = new AbortController()
@@ -19,7 +23,12 @@ export default function ShareList() {
             console.log(result)
            }
         )
-        .catch(setError)
+        .catch((error) => {
+                setErrorMessage("error fetching shares")
+                console.log(error)
+                setLoading(false)
+            }
+        )
         .finally(() => setLoading(false))
 
         return () => {
@@ -31,10 +40,14 @@ export default function ShareList() {
 
     return (
     <>
-       <h1>Ciao</h1>
+       <div><h1>Ciao</h1>
+       {!loading && (<div>Loading...</div>)}
+       {errorMessage && (<div className="error"> {errorMessage} </div>)}
        {
         shareList.map(share => (<div key={share.id}>{share.id} {share.shareComment}</div>))
        }
+       </div>
+
 
     </>
     )

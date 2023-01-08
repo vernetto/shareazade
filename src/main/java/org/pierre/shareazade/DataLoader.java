@@ -22,14 +22,27 @@ public class DataLoader implements ApplicationRunner {
     private final UserRepository userRepository;
 
     public void run(ApplicationArguments args) {
-        CityEntity cityEntity = new CityEntity();
-        cityEntity.setCityName("Aosta");
-        cityRepository.save(cityEntity);
-        UserEntity user = new UserEntity();
-        user.setTelephone("0762124321");
-        user.setEmail("publicpierre@gmail.com");
-        user.setFullName("Pierluigi Vernetto");
-        userRepository.save(user);
+        CityEntity cityEntity1 = new CityEntity();
+        cityEntity1.setCityName("Aosta");
+        cityRepository.save(cityEntity1);
+        CityEntity cityEntity2 = new CityEntity();
+        cityEntity2.setCityName("Lausanne");
+        cityRepository.save(cityEntity2);
+        CityEntity cityEntity3 = new CityEntity();
+        cityEntity3.setCityName("Torino");
+        cityRepository.save(cityEntity3);
+
+        UserEntity user1 = new UserEntity();
+        user1.setTelephone("0762124321");
+        user1.setEmail("publicpierre@gmail.com");
+        user1.setFullName("Pierluigi Vernetto");
+        userRepository.save(user1);
+        UserEntity user2 = new UserEntity();
+        user2.setTelephone("333456789");
+        user2.setEmail("vernettop@gmail.com");
+        user2.setFullName("Igiulreip Ottenrev");
+        userRepository.save(user2);
+
         RideEntryEntity rideEntry = new RideEntryEntity();
         rideEntry.setRideDate(new Date());
         rideEntry.setRideTime("05");

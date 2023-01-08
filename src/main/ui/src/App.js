@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import ShareList from './ShareList';
-import BasicTable from './BasicTable'
+import RideTable from './RideTable'
 
 function App() {
   return (
@@ -19,8 +19,7 @@ function App() {
         >
           Learn React222
         </a>
-        <ShareList></ShareList>
-        <BasicTable></BasicTable>
+        <RideTable></RideTable>
       </header>
       
     </div>
