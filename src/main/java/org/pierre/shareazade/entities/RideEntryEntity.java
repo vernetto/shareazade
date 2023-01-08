@@ -26,4 +26,13 @@ public class RideEntryEntity {
     @Column(length = 100, nullable = true)
     private String shareComment;
 
+    @ManyToOne
+    private UserEntity userEntity;
+
+    @ManyToOne
+    private CityEntity fromCity;
+
+    @ManyToOne
+    private CityEntity toCity;
+
 }

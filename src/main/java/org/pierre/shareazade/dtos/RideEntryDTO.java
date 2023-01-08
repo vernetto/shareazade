@@ -12,4 +12,7 @@ public class RideEntryDTO {
     private String rideTime;
     private RideType rideType;
     private String rideComment;
+    private UserDTO user;
+    private CityDTO fromCity;
+    private CityDTO toCity;
 }

@@ -47,6 +47,10 @@ public class DataLoader implements ApplicationRunner {
         rideEntry.setRideDate(new Date());
         rideEntry.setRideTime("05");
         rideEntry.setRideType(RideType.REQUEST);
+        rideEntry.setFromCity(cityEntity1);
+        rideEntry.setToCity(cityEntity2);
+        rideEntry.setUserEntity(user1);
+
 
         rideEntryRepository.save(rideEntry);
     }
