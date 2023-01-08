@@ -12,7 +12,7 @@ import java.util.List;
 public class RideEntryService {
     private final RideEntryRepository rideEntryRepository;
 
-    public List<RideEntryEntity> findALl() {
+    public List<RideEntryEntity> findAll() {
         return rideEntryRepository.findAll();
     }
 

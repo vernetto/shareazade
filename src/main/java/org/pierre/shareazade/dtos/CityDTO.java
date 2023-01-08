@@ -1,6 +1,5 @@
 package org.pierre.shareazade.dtos;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
 

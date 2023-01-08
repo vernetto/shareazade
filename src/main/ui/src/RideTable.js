@@ -24,7 +24,7 @@ export default function RideTable() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("http://localhost:8080/share/getAll", { signal: controller.signal })
+    fetch("http://localhost:8080/ride/getAll", { signal: controller.signal })
       .then((res) => res.json())
       .then((result) => {
         setRideList(result);

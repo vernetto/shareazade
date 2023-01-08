@@ -2,32 +2,54 @@ package org.pierre.shareazade.controllers;
 
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
-import org.pierre.shareazade.constants.RideType;
 import org.pierre.shareazade.converters.EntityDTOConverter;
+import org.pierre.shareazade.dtos.CityDTO;
 import org.pierre.shareazade.dtos.RideEntryDTO;
+import org.pierre.shareazade.dtos.UserDTO;
+import org.pierre.shareazade.entities.CityEntity;
+import org.pierre.shareazade.entities.UserEntity;
+import org.pierre.shareazade.services.CityService;
+import org.pierre.shareazade.services.UserService;
 import org.pierre.shareazade.services.RideEntryService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Api(value = "Order Rest Controller", description = "REST API for Order")
-@RequestMapping("/share/")
+@RequestMapping("/")
 @RestController
 @CrossOrigin
 @AllArgsConstructor
 public class ShareController {
 
     private final RideEntryService rideEntryService;
+    private final CityService cityService;
+    private final UserService userService;
     private final EntityDTOConverter entityDTOConverter;
 
-    @GetMapping("/getAll")
+    @GetMapping("/ride/getAll")
     public List<RideEntryDTO> getAllRides() {
-        return entityDTOConverter.convertRideEntryEntityToDTOList(rideEntryService.findALl());
+        return entityDTOConverter.convertRideEntryEntityToDTOList(rideEntryService.findAll());
+    }
+
+    @GetMapping("/city/getAll")
+    public List<CityDTO> getAllCities() {
+        return entityDTOConverter.convertCityEntityToDTOList(cityService.findAll());
+    }
+
+
+    @PostMapping("/city")
+    public void createCity(@RequestBody CityDTO cityDTO) {
+        cityDTO.setId(null);
+        CityEntity cityEntity = entityDTOConverter.convertCityDTOToEntity(cityDTO);
+        cityService.createCity(cityEntity);
+    }
+
+    @PostMapping("/user")
+    public void createUser(@RequestBody UserDTO userDTO) {
+        userDTO.setId(null);
+        UserEntity userEntity = entityDTOConverter.convertUserDTOToEntity(userDTO);
+        userService.createUser(userEntity);
     }
 
 }
