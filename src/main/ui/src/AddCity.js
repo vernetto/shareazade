@@ -4,7 +4,17 @@ import CityTable from "./CityTable";
 export default function AddCity() {
     const inputRef = useRef()
   function onSubmit(e) {
-    alert(inputRef.current.value)
+    e.preventDefault()
+    const city=inputRef.current.value
+    fetch("http://localhost:8080/city/add",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({cityName: city})
+
+  }).then(()=>{
+    console.log("New Student added")
+    inputRef.current.value = ""
+  })
   }
 
   return (

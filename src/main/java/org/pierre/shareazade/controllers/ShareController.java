@@ -2,6 +2,7 @@ package org.pierre.shareazade.controllers;
 
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
+import org.pierre.shareazade.ShareException;
 import org.pierre.shareazade.converters.EntityDTOConverter;
 import org.pierre.shareazade.dtos.CityDTO;
 import org.pierre.shareazade.dtos.RideEntryDTO;
@@ -38,14 +39,14 @@ public class ShareController {
     }
 
 
-    @PostMapping("/city")
-    public void createCity(@RequestBody CityDTO cityDTO) {
+    @PostMapping("/city/add")
+    public void createCity(@RequestBody CityDTO cityDTO) throws ShareException {
         cityDTO.setId(null);
         CityEntity cityEntity = entityDTOConverter.convertCityDTOToEntity(cityDTO);
         cityService.createCity(cityEntity);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/user/add")
     public void createUser(@RequestBody UserDTO userDTO) {
         userDTO.setId(null);
         UserEntity userEntity = entityDTOConverter.convertUserDTOToEntity(userDTO);
