@@ -8,6 +8,7 @@ import AddCity from "./AddCity";
 import AddRide from "./AddRide";
 import Ride from "./Ride";
 import User from "./User";
+import CustomTable from "./CustomTable";
 import NotFound from "./NotFound";
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <CustomTable/>
     </>
   );
 }
