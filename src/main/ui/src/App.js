@@ -10,9 +10,27 @@ import Ride from "./Ride";
 import User from "./User";
 import CustomTable from "./CustomTable";
 import NotFound from "./NotFound";
+import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+const clientId = '466563001954-dqtipfc6tpsd9nnio47finarbedi2v82.apps.googleusercontent.com';
+
+
 
 function App() {
+  const { signIn } = useGoogleLogin({
+    clientId,
+    onLoginSuccess: (response) => {
+      console.log('Logged in successfully:', response);
+    },
+    onLoginFailure: (error) => {
+      console.log('Login failed:', error);
+    },
+    autoLoad: false,
+  });
+
   return (
+    <GoogleOAuthProvider clientId={clientId}>
     <>
       <nav>
         <ul>
@@ -30,6 +48,8 @@ function App() {
           </li>
         </ul>
       </nav>
+      
+      <button onClick={signIn}>Sign In with Google</button>
 
       <Routes>
         <Route path="/" element={<RideTable />}></Route>
@@ -48,6 +68,7 @@ function App() {
       </Routes>
       <CustomTable/>
     </>
+    </GoogleOAuthProvider>
   );
 }
 
