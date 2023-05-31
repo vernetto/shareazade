@@ -11,7 +11,9 @@ Google API key can be found here https://console.cloud.google.com/apis/credentia
 
 https://github.com/MomenSherif/react-oauth Sample React Google Oauth code  
 
-http://localhost:8080/order/v1/executionReportPDF export the PDF from the browser
+https://www.npmjs.com/package/ag-grid-community
+
+
 
 # References
 
@@ -23,23 +25,4 @@ https://jsonpath.com/
 
 https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
 https://www.baeldung.com/java-modelmapper-lists
-
-
-Lifecycle of an OrderBook
-
-```mermaid
-graph TD
-    A[OPEN] -->|all orders created + closeOrderBook| B(CLOSED)
-    B(CLOSED) -->|all orders closed + openOrderBook| A[OPEN]
-``` 
-
-Lifecycle of an OrderEntry
-
-```mermaid
-graph TD
-    A[OPEN] -->|execution fills it| B(FILLED)
-    B(FILLED) -->|all orders are filled| C[CLOSED]
-``` 
-
-
 
