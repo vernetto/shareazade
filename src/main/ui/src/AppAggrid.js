@@ -12,9 +12,9 @@ const AppAggrid = () => {
    ]);
 
    const [columnDefs] = useState([
-       { field: 'make' },
-       { field: 'model' },
-       { field: 'price' }
+       { field: 'make', sortable: true, filter: true   },
+       { field: 'model' , sortable: true, filter: true },
+       { field: 'price', sortable: true , filter: true }
    ])
 
    return (
