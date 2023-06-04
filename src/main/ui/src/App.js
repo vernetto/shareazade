@@ -11,7 +11,7 @@ import User from "./User";
 import NotFound from "./NotFound";
 import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import CityTable from "./CityTable";
+
 
 const clientId = '466563001954-dqtipfc6tpsd9nnio47finarbedi2v82.apps.googleusercontent.com';
 
@@ -54,7 +54,6 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-      <CityTable/>
     </>
   );
 }

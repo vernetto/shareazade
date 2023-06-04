@@ -27,7 +27,6 @@ export default function RideTable() {
 ])
 
 
-
   useEffect(() => {
     console.log("shareList changed " + JSON.stringify(rideList));
   }, [rideList]);
