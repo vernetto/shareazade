@@ -1,18 +1,32 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 export default function RideTable() {
   const [loading, setLoading] = useState(true);
   const [rideList, setRideList] = useState([]);
+  const [rowData, setRowData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [gridApi, setGridApi] = useState(null);
+  const [gridApigridColumnApi, setGridColumnApi] = useState(null);
+
+  const [quickFilterText, setQuickFilterText] = useState('');
+
+  const [columnDefs] = useState([
+    { field: 'id', sortable: true, filter: true   },
+    { field: 'rideType', sortable: true , filter: true },
+    { field: 'fromCity', sortable: true , filter: true },
+    { field: 'toCity', sortable: true , filter: true },
+    { field: 'rideDate' , sortable: true, filter: true },
+    { field: 'rideTime', sortable: true , filter: true },
+    { field: 'fullName', sortable: true , filter: true },
+    { field: 'rideComment', sortable: true , filter: true }    
+])
+
+
 
   useEffect(() => {
     console.log("shareList changed " + JSON.stringify(rideList));
@@ -21,6 +35,20 @@ export default function RideTable() {
   useEffect(() => {
     console.log("loading changed " + JSON.stringify(loading));
   }, [loading]);
+
+  useEffect(() => {
+    console.log('quickFilterText changed: ', quickFilterText);
+  }, [quickFilterText]);
+
+  function onGridReady(params) {
+    setGridApi(params.api);
+    setGridColumnApi(params.columnApi);
+  }
+const onFilterTextChange=(e)=>{
+  gridApi.setQuickFilter(e.target.value)
+  console.log(e.target.value)
+}
+  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,6 +60,17 @@ export default function RideTable() {
           "setting " + result.length + "  elements, " + JSON.stringify(result)
         );
         console.log(result);
+        const transformedData = result.map(item => ({
+          id: item.id,
+          rideType: item.rideType,
+          fromCity: item.fromCity.cityName,
+          toCity: item.toCity.cityName,
+          rideDate: item.rideDate,
+          rideTime: item.rideTime,
+          fullName: item.user.fullName,
+          rideComment: item.rideComment || 'N/A',
+        }));
+        setRowData(transformedData);
       })
       .catch((error) => {
         setErrorMessage("error fetching shares");
@@ -46,40 +85,15 @@ export default function RideTable() {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-          <TableCell align="right">Id</TableCell>
-            <TableCell align="right">Type</TableCell>
-            <TableCell align="right">From</TableCell>
-            <TableCell align="right">To</TableCell>
-            <TableCell align="right">Date</TableCell>
-            <TableCell align="right">Time</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Comment</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rideList.map((ride) => (
-            <TableRow
-              key={ride.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="right"><Link to={`/ride/${ride.id}`}>{ride.id}</Link></TableCell>
-              <TableCell component="th" scope="row">
-                {ride.rideType}
-              </TableCell>
-              <TableCell align="right">{ride.fromCity.cityName}</TableCell>
-              <TableCell align="right">{ride.toCity.cityName}</TableCell>
-              <TableCell align="right">{ride.rideDate}</TableCell>
-              <TableCell align="right">{ride.rideTime}</TableCell>
-              <TableCell align="right"><Link to={`/user/${ride.user.id}`}>{ride.user.fullName}</Link></TableCell>
-              <TableCell align="right">{ride.comment}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    <div className="ag-theme-alpine" style={{height: 400}}>
+     <input type="search" onChange={onFilterTextChange} placeholder="Quick Filter" />
+
+        <AgGridReact
+            onGridReady={onGridReady}
+            rowData={rowData}
+            columnDefs={columnDefs}>
+        </AgGridReact>
+    </div>
+);
+
 }
