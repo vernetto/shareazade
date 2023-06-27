@@ -6,7 +6,7 @@ export default function AddCity() {
   function onSubmit(e) {
     e.preventDefault()
     const city=inputRef.current.value
-    fetch("http://localhost:8080/city/add",{
+    fetch("/city/add",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({cityName: city})

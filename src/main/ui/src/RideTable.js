@@ -51,7 +51,7 @@ const onFilterTextChange=(e)=>{
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("http://localhost:8080/ride/getAll", { signal: controller.signal })
+    fetch("/ride/getAll", { signal: controller.signal })
       .then((res) => res.json())
       .then((result) => {
         setRideList(result);

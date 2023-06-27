@@ -1,33 +1,37 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-export default function CityTable() {
-    //const [cities, setCities] = useState([])
-    let cities = []
+const CityTable = () => {
+    const [cities, setCities] = useState([]);
 
-    const fetchData = () => {
-        fetch("http://localhost:8080/city/getAll")
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            cities = data;
-            console.log(JSON.stringify(cities))
-        });
-    }
+    useEffect(() => {
+        axios.get('/city/getAll')
+            .then(res => {
+                setCities(res.data);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }, []);
 
-    console.log("fetching data")
-    fetchData()
-    console.log("done fetching data")
-    console.log("after " + JSON.stringify(cities))
-    
     return (
-    <>
-        <h1>Cities here</h1>
-        <ul>
-            {cities.map((city) => (
-                <li key={city.id}>{city.cityName}</li>)
-            )}
-        </ul>
-    </>
-    )
-}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>City Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {cities.map(city => (
+                    <tr key={city.id}>
+                        <td>{city.id}</td>
+                        <td>{city.cityName}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
+};
+
+export default CityTable;
